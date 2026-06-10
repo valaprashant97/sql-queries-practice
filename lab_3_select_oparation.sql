@@ -54,21 +54,70 @@ FROM BORROW
 WHERE BNAME NOT IN ('VIRAR', 'AJNI');
 
 --16. Display all the customer’s name other than ‘MINU’ from deposit table (Use: NOT, <>, !=) 
+SELECT CNAME
+FROM DEPOSIT
+WHERE NOT CNAME = 'MINU';
+
+SELECT CNAME
+FROM DEPOSIT
+WHERE CNAME <> 'MINU';
+-- Meaning OF <> IS NOT EQUAL
+
+SELECT CNAME
+FROM DEPOSIT
+WHERE CNAME != 'MINU';
+
 --17. Display customer name from deposit table whose branch name is not available. (NULL) 
+SELECT CNAME
+FROM DEPOSIT
+WHERE BNAME IS NULL;
+
 --18. Retrieve all unique branches using DISTINCT. (Use Branch Table) 
---19. Retrieve first 50% record from borrow table. 
---20. Retrieve first five account number from deposit table. 
+SELECT DISTINCT BNAME FROM BRANCH;
+
+--19. Retrieve first 50% record from borrow table.
+SELECT TOP 50 PERCENT * FROM BORROW;
+
+--20. Retrieve first five account number from deposit table.
+SELECT TOP 5 ACTNO FROM DEPOSIT;
  
 --Part – B: 
---1. Display all the details of first five customers from deposit table. 
+--1. Display all the details of first five customers from deposit table.
+SELECT TOP 5 * FROM DEPOSIT;
+
 --2. Display all the details of first three depositors from deposit table whose amount is greater than 1000. 
---3. Display Loan No, Customer Name of first five borrowers whose branch name does not belongs to ‘ANDHERI’ from borrow table. 
---4. Select all details with account numbers not in the range 105 to 109 in deposit table. 
+SELECT TOP 3 * FROM DEPOSIT WHERE AMOUNT > 1000;
+
+--3. Display Loan No, Customer Name of first five borrowers whose branch name does not belongs to ‘ANDHERI’ from borrow table.
+SELECT TOP 5 LONENO, CNAME FROM BORROW WHERE BNAME != 'ANDHERI';
+
+--4. Select all details with account numbers not in the range 105 to 109 in deposit table.
+SELECT * FROM DEPOSIT WHERE ACTNO NOT BETWEEN 105 AND 109;
+
 --5. Select all records from BORROW where the amount is greater than 1000 and less than or equal to 7000, and the loan number is between 250 and 600 
+SELECT * FROM BORROW WHERE AMOUNT > 1000 AND AMOUNT <= 7000 AND LONENO BETWEEN 250 AND 600;
  
 --Part – C: 
 --1. Display all the detail of customer who deposited more than 5000 without using * from deposit table. 
---2. Retrieve all unique customer names with city. (Use Customer table) 
---3. Retrieve records from the BORROW table where the loan amount is greater than 3000 and the loan number is not a multiple of 3. 
---4. Retrieve records from the DEPOSIT table where amount is greater than 2000 also account number is between 100 and 110 and date is after '1-MAR-1995' or before '27-MAR-1996'. 
+SELECT ACTNO, CNAME, BNAME, AMOUNT, ADATE FROM DEPOSIT WHERE AMOUNT > 5000;
+
+--2. Retrieve all unique customer names with city. (Use Customer table)
+SELECT * FROM CUSTOMERS;
+SELECT DISTINCT CNAME, CITY FROM CUSTOMERS;
+
+--3. Retrieve records from the BORROW table where the loan amount is greater than 3000 and the loan number is not a multiple of 3.
+SELECT * FROM BORROW;
+SELECT * FROM BORROW WHERE AMOUNT > 3000 AND LONENO % 3 != 0;
+
+--4. Retrieve records from the DEPOSIT table where amount is greater than 2000 also account number is between 100 and 110 and date 
+--is after '1-MAR-1995' or before '27-MAR-1996'. 
+SELECT * FROM DEPOSIT;
+SELECT * FROM DEPOSIT WHERE AMOUNT > 2000 AND ACTNO BETWEEN 100 AND 110 AND (ADATE > '1995-03-01' OR ADATE < '1996-03-27');
+
 --5. Retrieve all odd/even value loan number from Borrow table.
+
+--- ODD
+SELECT * FROM BORROW WHERE LONENO % 2 !=0;
+
+--- EVEN
+SELECT * FROM BORROW WHERE LONENO % 2 = 0;
