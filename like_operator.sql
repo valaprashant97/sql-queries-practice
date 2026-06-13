@@ -107,3 +107,10 @@ drop table Faculty;
 --'_____'   -- Exactly 5 chars
 --'[A-K]%'  -- Starts A to K (SQL Server)
 --'[^A-K]%' -- Not starts A to K (SQL Server)
+
+--% = any number of characters
+--_ = exactly one character
+--[A-H] = range
+--[^A-H] = not in range
+--LEN(column) = string length
+--IS NULL / IS NOT NULL website check ke liye use hota hai.
