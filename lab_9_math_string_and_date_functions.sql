@@ -1,21 +1,52 @@
 --Math functions 
 --Part – A: 
 --1. Display the result of 5 multiply by 30. 
---2. Find out the absolute value of -25, 25, -50 and 50. 
---3. Find smallest integer value that is greater than or equal to 25.2, 25.7 and -25.2. 
---4. Find largest integer value that is smaller than or equal to 25.2, 25.7 and -25.2. 
+SELECT 5 * 30 AS RESULT;
+
+--2. Find out the absolute value of -25, 25, -50 and 50.
+SELECT ABS(-25) AS Abs1, ABS(25) AS Abs2, ABS(-50) AS Abs3, ABS(50) AS Abs4;
+
+--3. Find smallest integer value that is greater than or equal to 25.2, 25.7 and -25.2.
+SELECT CEILING(25.2) AS Value1, CEILING(25.7) AS Value2, CEILING(-25.2) AS Value3;
+
+--4. Find largest integer value that is smaller than or equal to 25.2, 25.7 and -25.2.
+SELECT FLOOR(25.2) AS Value1, FLOOR(25.7) AS Value2, FLOOR(-25.2) AS Value3;
+
 --5. Find out remainder of 5 divided 2 and 5 divided by 3. 
+SELECT 5 % 2 AS Remainder1, 5 % 3 AS Remainder2;
+
 --6. Find out value of 3 raised to 2nd power and 4 raised 3rd power. 
+SELECT POWER(3,2) AS Power1, POWER(4,3) AS Power2;
+
 --7. Find out the square root of 25, 30 and 50. 
+SELECT SQRT(25) AS Sqrt25, SQRT(30) AS Sqrt30, SQRT(50) AS Sqrt50;
+
 --8. Find out the square of 5, 15, and 25. 
+SELECT POWER(5,2) AS Square5, POWER(15,2) AS Square15, POWER(25,2) AS Square25;
+
 --9. Find out the value of PI. 
+SELECT PI() AS PI_Value;
+
 --10. Find out round value of 157.732 for 2, 0 and -2 decimal points. 
+SELECT ROUND(157.732,2) AS Round2, ROUND(157.732,0) AS Round0, ROUND(157.732,-2) AS RoundMinus2;
+
 --11. Find out exponential value of 2 and 3. 
+SELECT EXP(2) AS Exp2, EXP(3) AS Exp3;
+
 --12. Find out logarithm having base e of 10 and 2. 
+SELECT LOG(10) AS Log10, LOG(2) AS Log2;
+
 --13. Find out logarithm having base b having value 10 of 5 and 100. 
---14. Find sine, cosine and tangent of 3.1415. 
+SELECT LOG10(5) AS LogBase10_5, LOG10(100) AS LogBase10_100;
+
+--14. Find sine, cosine and tangent of 3.1415.
+SELECT SIN(3.1415) AS SineValue, COS(3.1415) AS CosineValue, TAN(3.1415) AS TangentValue;
+
 --15. Find sign of -25, 0 and 25. 
+SELECT SIGN(-25) AS Sign1, SIGN(0) AS Sign2, SIGN(25) AS Sign3;
+
 --16. Generate random number using function.
+SELECT RAND() AS Random_Number;
 
 --Part – B: 
 --Create and insert the following records in the EMP_MASTER table.  
