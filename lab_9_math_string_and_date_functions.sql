@@ -97,6 +97,8 @@ SELECT * FROM EMP_MASTER WHERE Commission > Salary * 0.25;
 --than 15000. 
 SELECT * FROM EMP_MASTER WHERE JoiningDate < '2005-01-01' AND Salary + Commission > 15000;
 
+--4. Find employees whose total earnings (Salary + Commission) are at least double their salary. 
+SELECT * FROM EMP_MASTER WHERE Salary + Commission >= Salary * 2;
 
 --String functions 
 --Part – A: 
