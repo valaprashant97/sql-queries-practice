@@ -18,7 +18,6 @@ VALUES
 CREATE TABLE RESULT (
     RNo INT,
     SPI DECIMAL(3,1),
-    FOREIGN KEY (RNo) REFERENCES STU_INFO(RNo)
 );
 
 INSERT INTO RESULT (RNo, SPI)
@@ -52,22 +51,87 @@ SELECT * FROM RESULT;
 SELECT * FROM EMPLOYEE_MASTER;
 
 --Part – A: 
---1. Combine information from student and result table using cross join or Cartesian product. 
---2. Perform inner join on Student and Result tables. 
+--1. Combine information from student and result table using cross join or Cartesian product.
+SELECT * FROM STU_INFO CROSS jOIN RESULT;
+
+--2. Perform inner join on Student and Result tables.
+SELECT * FROM  STU_INFO INNER JOIN RESULT 
+ON STU_INFO.RNo = RESULT.RNo;
+
 --3. Perform the left outer join on Student and Result tables. 
+SELECT * FROM STU_INFO LEFT JOIN RESULT
+ON STU_INFO.RNo = RESULT.RNo;
+
 --4. Perform the right outer join on Student and Result tables. 
+SELECT * FROM STU_INFO AS S RIGHT JOIN RESULT AS R
+ON S.RNo = R.RNo;
+
 --5. Perform the full outer join on Student and Result tables.  
+SELECT * FROM STU_INFO AS S FULL OUTER JOIN RESULT AS R
+ON S.RNo = R.RNo;
+
 --6. Display Rno, Name, Branch and SPI of all students. 
+SELECT S.Rno, S.Name, S.Branch, R.SPI FROM 
+STU_INFO AS S LEFT JOIN RESULT AS R
+ON S.RNo = R.RNo;
+
 --7. Display Rno, Name, Branch and SPI of CE branch’s student only. 
+SELECT S.Rno, S.Name, S.Branch, R.SPI FROM 
+STU_INFO AS S LEFT JOIN RESULT AS R
+ON S.RNo = R.RNo
+WHERE S.Branch = 'CE';
+
+
 --8. Display Rno, Name, Branch and SPI of other than EC branch’s student only. 
---9. Display average result of each branch. 
+SELECT S.Rno, S.Branch, R.SPI FROM
+STU_INFO AS S LEFT JOIN RESULT AS R
+ON S.RNo = R.RNo
+WHERE S.Branch <> 'EC';
+
+--9. Display average result of each branch.
+SELECT S.Branch, AVG(R.SPI) AS AVG_RESULT FROM
+STU_INFO AS S INNER JOIN RESULT AS R
+ON S.Rno = R.RNO 
+GROUP BY S.Branch;
+
 --10. Display average result of CE and ME branch. 
+SELECT S.Branch, AVG(R.SPI) AS AVG_RESULT FROM
+STU_INFO AS S INNER JOIN RESULT AS R 
+ON S.RNo = R.RNo
+WHERE S.Branch IN ('CE', 'ME')
+GROUP BY S.Branch;
+
 --11. Display Maximum and Minimum SPI of each branch. 
+SELECT S.Branch, MAX(R.SPI) AS MAX_SPI, MIN(R.SPI) AS MIN_SPI
+FROM STU_INFO AS S INNER JOIN RESULT AS R
+ON S.RNo = R.RNo
+GROUP BY S.Branch;
+
 --12. Display branch wise student’s count in descending order.
+SELECT S.Branch, COUNT(*) AS STUDENT_COUNT
+FROM STU_INFO AS S
+GROUP BY Branch
+ORDER BY STUDENT_COUNT DESC;
 
 --Part – B: 
 --1. Display average result of each branch and sort them in ascending order by SPI. 
+SELECT S.Branch, AVG(R.SPI) AS AVG_RESULT 
+FROM STU_INFO AS S INNER JOIN RESULT AS R
+ON S.RNo = R.RNo
+GROUP BY Branch
+ORDER BY AVG_RESULT ASC;
+
 --2. Display highest SPI from each branch and sort them in descending order. 
+SELECT s.Branch, MAX(R.SPI) AS MAX_SPI 
+FROM STU_INFO AS S INNER JOIN RESULT AS R
+ON S.RNo = R.RNo
+GROUP BY Branch
+ORDER BY MAX_SPI DESC;
+
 
 --Part – C: 
 --1. Retrieve the names of employee along with their manager’s name from the Employee table. 
+SELECT E.Name, M.Name
+FROM EMPLOYEE_MASTER E
+LEFT JOIN EMPLOYEE_MASTER M
+ON E.ManagerNo = M.EmployeeNo;
